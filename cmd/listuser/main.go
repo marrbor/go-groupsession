@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/marrbor/go-groupsession/control"
+	"github.com/marrbor/go-groupsession/webapi/user"
 
 	"github.com/marrbor/go-groupsession/cmd"
 )
@@ -16,7 +16,7 @@ func main() {
 		_, _ = fmt.Fprintf(os.Stderr, "%+v\n", err)
 		os.Exit(1)
 	}
-	ul, err := control.LoadAllUser(cp)
+	ul, err := user.LoadAllUser(cp)
 	for _, u := range ul {
 		u.Dump()
 	}

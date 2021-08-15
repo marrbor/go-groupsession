@@ -6,13 +6,15 @@ import (
 	"os"
 	"strings"
 
-	"github.com/marrbor/go-groupsession/util"
+	"github.com/marrbor/go-groupsession/webapi"
 
-	"github.com/marrbor/go-groupsession/control"
+	"github.com/marrbor/go-groupsession/webapi/user"
+
+	"github.com/marrbor/go-groupsession/util"
 )
 
 // SetupAndLogin ログイン処理
-func SetupAndLogin() (*control.CommunicateParam, error) {
+func SetupAndLogin() (*webapi.Context, error) {
 	var uid string
 	var pw string
 	var domain string
@@ -60,13 +62,9 @@ func SetupAndLogin() (*control.CommunicateParam, error) {
 		}
 	}
 
-	cl, token, err := control.Login(uid, pw, domain)
+	cp, err := user.Login(uid, pw, domain)
 	if err != nil {
 		return nil, err
 	}
-	return &control.CommunicateParam{
-		Client: cl,
-		Domain: domain,
-		Token:  token,
-	}, nil
+	return cp, nil
 }
